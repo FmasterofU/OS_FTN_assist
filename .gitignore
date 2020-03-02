@@ -1,0 +1,11 @@
+[Dd]ebug/
+[Rr]elease/
+.vs/
+*.o
+*.exe
+*.c
+*.cbp
+*.vcxproj
+*.filters
+*.user
+*.sln
