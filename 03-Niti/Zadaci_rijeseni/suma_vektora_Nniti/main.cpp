@@ -30,7 +30,7 @@ using namespace std;
 
 void testirajSumu() {
     vector<double> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    double zbir;
+    double zbir = 0;
     f(v.begin(), v.end(), zbir);
 
     cout << "Zbir vektora: " << zbir << endl;

@@ -3,10 +3,17 @@ Napraviti program koji kreira jednu nit kojoj se prosleđuju dva cela broja a i 
 */
 
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
+void nit(int a, int b) {
+    cout << a + b << endl;
+}
+
 int main()
 {
+    thread th(nit, 10, 13);
+    th.join();
     return 0;
 }

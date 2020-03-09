@@ -3,10 +3,19 @@ Napraviti konkurentni program koji pokreće više niti u petlji. Svakoj niti pro
 */
 
 #include <iostream>
-
+#include <thread>
 using namespace std;
+
+void nit(int i) {
+    cout << "I'm thread " << i << "." << endl;
+}
 
 int main()
 {
+    thread th[10];
+    for (int i = 0; i < 10; i++)
+        th[i] = thread(nit, i + 1);
+    for (int i = 0; i < 10; i++)
+        th[i].join();
     return 0;
 }

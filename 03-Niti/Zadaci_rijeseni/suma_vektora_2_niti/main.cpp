@@ -19,7 +19,7 @@ using namespace std;
 
 void testirajSumu() {
     vector<double> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    double zbir;
+    double zbir = 0;
     f(v.begin(), v.end(), zbir);
 
     cout << "Zbir vektora: " << zbir << endl;
@@ -27,7 +27,7 @@ void testirajSumu() {
 
 void testirajNiti() {
     vector<double> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    double zbir;
+    double zbir = 0;
     zbir = sumiraj(v);
 
     cout << "Zbir vektora, koriscenjem 2 niti: " << zbir << endl;
@@ -36,7 +36,7 @@ void testirajNiti() {
 int main() {
     testirajSumu();
     // Otkomentarisati kada implementirate funkciju sumiraj:
-    //testirajNiti();
+    testirajNiti();
 
     return 0;
 }

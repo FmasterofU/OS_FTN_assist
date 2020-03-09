@@ -5,11 +5,21 @@ Testirati program tako što će main nit, koristeći objekat koji predstavlja no
 */
 
 #include <iostream>
-
+#include <thread>
 using namespace std;
+
+void visina() {
+    int height;
+    cout << "Koliko ste visoki?" << endl;
+    cin >> height;
+    cout << endl << "Vasa visina je " << height << " cm." << endl;
+}
 
 int main()
 {
+    thread nit(visina);
+    nit.join();
+    //nit.detach();
     return 0;
 }
 
