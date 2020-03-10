@@ -90,5 +90,5 @@ void testirajIzracunaj() {
 int main() {
     testirajNadjiPovoljno();
     // Otkomentarisati kada implementirate funkciju "izracunaj":
-    //testirajIzracunaj();
+    testirajIzracunaj();
 }

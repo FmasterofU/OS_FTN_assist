@@ -45,7 +45,7 @@ void testirajObracunajUkupno() {
 
     list<string> kupljeno = {"mleko", "mleko", "kafa"};
 
-    double rezultat;
+    double rezultat = 0;
     obracunajUkupno(kupljeno, cenovnik, rezultat);
 
     cout << "Rezultat izvrsavanja funkcije obracunajUkupno(): " << rezultat << endl;
@@ -66,5 +66,5 @@ void testirajIzracunaj() {
 int main() {
     testirajObracunajUkupno();
     // Otkomentarisati kada implementirate funkciju "izracunaj":
-    //testirajIzracunaj();
+    testirajIzracunaj();
 }
