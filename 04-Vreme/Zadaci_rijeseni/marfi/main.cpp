@@ -17,6 +17,7 @@ Pošto se implementira funkcija kasa, potrebno je još implementirati u funkciji
 
 #include <iostream>
 #include <thread>
+#include <algorithm>
 
 using namespace std;
 using namespace chrono;
@@ -26,6 +27,13 @@ const int MAX_MILISEKUNDI_PO_KUPCU = 100;
 
 void kasa(int broj_kupaca, duration<double, milli>& vreme_na_kasi) {
 	// Implementirati...
+    auto time_start = steady_clock::now();
+    while (broj_kupaca) {
+        this_thread::sleep_for(milliseconds(rand() % MAX_MILISEKUNDI_PO_KUPCU + 1));
+        --broj_kupaca;
+    }
+    vreme_na_kasi = steady_clock::now() - time_start;
+    // Done.
 }
 
 int main() {
@@ -52,6 +60,18 @@ int main() {
     // Nakon završetka rada niti, u nizu "vremena" su evidentirana trajanja kupovine na svakoj od kasa, sada među tim vremenima treba naći najduže:
     // Implementirati...
 
+    duration<double, milli> time = vremena[0];
+    for_each(vremena, vremena + UKUPNO_KASA, [&time](const auto& this_time) {if (time > this_time) time = this_time; });
+
+    // Done.
+
     // Ukoliko je najduže trajala kupovina na kasi koju je kupac izabrao, onda je Marfijev zakon potrvrđen:
     // Implementirati...
+
+    if (vremena[moja_kasa] == time)
+        cout << "Marfi potvrdjen, life hates you." << endl;
+    else
+        cout << "Marfi je ovaj put omanuo, ofc the universe hates you." << endl;
+
+    // Done.
 }

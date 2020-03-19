@@ -9,6 +9,8 @@ Za svaku nit, evidentirati trenutke kada je izvršavanje počelo i kada se zavr�
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <algorithm>
+#include <limits>
 
 using namespace std;
 using namespace chrono;
@@ -22,6 +24,11 @@ struct vreme {
 
 void f(cit pocetak, cit kraj, double & min, struct vreme * v) {
 	// Implementirati...
+    v->pocetak = system_clock::now();
+    min = numeric_limits<double>::max();
+    for_each(pocetak, kraj, [&min](double el) {if (abs(el) < abs(min)) min = el; });
+    v->kraj = system_clock::now();
+    // Done.
 }
 
 const int BROJ_NITI = 3;
@@ -43,5 +50,16 @@ int main() {
     thread niti[BROJ_NITI];
 
 	// Implementirati...
+
+    for (int i = 0; i < BROJ_NITI; i++)
+        niti[i] = thread(f, v.begin() + i * v.size() / BROJ_NITI, i != BROJ_NITI - 1 ? v.begin() + (i + 1) * v.size() / 3 : v.end(), ref(minimumi[i]), &vremena[i]);
+    for_each(niti, niti + BROJ_NITI, [](thread& th) {th.join(); });
+
+    for (int i = 0; i < BROJ_NITI; i++) {
+        duration<double, milli> dur = vremena[i].kraj - vremena[i].pocetak;
+        cout << "Thread " << i + 1 << " : " << dur.count() << " ms" << endl;
+    }
+
+    // Done.
 }
 
