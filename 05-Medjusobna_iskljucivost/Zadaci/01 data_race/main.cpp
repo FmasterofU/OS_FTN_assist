@@ -21,8 +21,8 @@ mutex mx;
 void increment() {
 	//unique_lock<mutex> l(mx); // kakvo ponasanje ce izazvati na ovom mjestu a kakvo unutra
 	for (int i = 0; i < iter; i++) {
-//		while (!mx.try_lock()); // !!! ne valja; unique_lock ?
-		cout << 1; // zasto nemamo realan prikaz bez obzira?; dovoljno dobar za prikaz
+//		mx.lock(); // lose koristiti !!! (excp) // while (!mx.try_lock()); // izaziva 'prazan rad' !!! ne valja; unique_lock ? da, bolje, ali, atomic
+		cout << 1; // zasto nemamo realan prikaz bez obzira (atomic)? (prekljucivanje); dovoljno dobar za prikaz
 		br++;
 		//brojac++;
 //		mx.unlock();
@@ -32,7 +32,7 @@ void increment() {
 void decrement() {
 	//unique_lock<mutex> l(mx);
 	for (int i = 0; i < iter; i++) {
-//		while (!mx.try_lock());
+//		mx.lock();
 		cout << 2;
 		br--;
 		//brojac--;
