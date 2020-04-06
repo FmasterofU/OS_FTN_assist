@@ -21,6 +21,7 @@ struct retVal{
 };
 
 double racuni[UKUPNO_RACUNA]; // Svaki element niza predstavlja iznos novca na odgovarajućem računu
+mutex mx;
 
 // izvor - indeks računa SA KOJEG se prebacuje novac (indeks u nizu "racuni")
 // cilj - indeks računa NA KOJI se prebacuje novac (indeks u nizu "racuni")
@@ -28,7 +29,14 @@ double racuni[UKUPNO_RACUNA]; // Svaki element niza predstavlja iznos novca na o
 // Nakon skidanja novca sa prvog računa potrebna je jedna sekunda da se novac uplati na drugi račun (trajanje ove operacije simulirati pauziranjem niti).
 // Povratna vrednost funkcije je struktura retVal koja sadrži iznos na prvom računu (izvor) pre i posle transakcije.
 retVal prebaci(int izvor, int cilj, double iznos) {
-	// Implementirati...
+    retVal ret;
+    unique_lock<mutex> lock(mx);
+    ret.staro = racuni[izvor];
+    racuni[izvor] -= iznos;
+    ret.novo = racuni[izvor];
+    this_thread::sleep_for(chrono::seconds(1));
+    racuni[cilj] += iznos;
+    return ret;
 }
 
 

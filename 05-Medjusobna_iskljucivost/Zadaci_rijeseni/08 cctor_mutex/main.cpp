@@ -4,6 +4,11 @@ U main funkciji napraviti objekat klase Brojac. Ispis vrednosti Brojaca radi pos
 Napraviti nit koja vrši ispis i proslediti joj Brojac.
 */
 
+#include <iostream>
+#include <mutex>
+#include <thread>
+using namespace std;
+
 class Brojac {
    mutex m; //propusnica pripada klasi i obezbedjuje sprecavanje stetnog preplitanja pri vrsenju operacija nad objektima klase
    int broj; //vrednost Brojaca
@@ -17,3 +22,16 @@ class Brojac {
       return os;
    }
 };
+
+
+void f(Brojac& b) {
+    cout << b << endl;
+}
+
+int main() {
+    Brojac b;
+    b.inc();
+    thread t(f, ref(b));
+    t.join();
+    return 0;
+}
